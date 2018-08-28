@@ -39,7 +39,6 @@ Post.propTypes = {
 
 class Comment extends Component {
   render() {
-    console.log("yo");
     return React.createElement(
       "div",
       {
@@ -54,7 +53,7 @@ class Comment extends Component {
         React.createElement(
           "span",
           {
-            className: "commentCount"
+            className: "commentContent"
           },
           this.props.content
         )
@@ -69,6 +68,40 @@ Comment.propTypes = {
   user: PropTypes.string.isRequired
 };
 
+class CreateComment extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      content: "",
+      user: ""
+    };
+  }
+  render() {
+    return React.createElement(
+      "form",
+      {
+        className: "createComment"
+      },
+      React.createElement("input", {
+        type: "text",
+        placeholder: "Your name",
+        value: this.state.user
+      }),
+      React.createElement("input", {
+        type: "text",
+        placeholder: "Thoughts?"
+      }),
+      React.createElement("input", {
+        type: "submit",
+        value: "Post"
+      })
+    );
+  }
+}
+CreateComment.propTypes = {
+  content: PropTypes.string
+};
+
 const App = React.createElement(
   Post,
   {
@@ -79,8 +112,9 @@ const App = React.createElement(
   React.createElement(Comment, {
     id: 2,
     user: "chris",
-    content: " commented: we will save you"
-  })
+    content: " we're going to save you"
+  }),
+  React.createElement(CreateComment)
 );
 
 render(App, node);
